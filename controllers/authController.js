@@ -1,8 +1,8 @@
-import User from "../models/User.js";
-import jwt from "jsonwebtoken";
-import bcrypt from "bcryptjs";
+const User = require("../models/User");
+const jwt = require("jsonwebtoken");
+const bcrypt = require("bcryptjs");
 
-export const adminLogin = async (req, res) => {
+exports.adminLogin = async (req, res) => {
   const { fullName, password } = req.body;
   try {
     const user = await User.findOne({ fullName, role: "admin" });
