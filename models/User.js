@@ -2,7 +2,6 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 
 const userSchema = new mongoose.Schema({
-  telegramId: { type: String },
   fullName: { type: String, required: true },
   role: { type: String, enum: ["user", "admin"], default: "user" },
   password: { type: String } 

@@ -4,6 +4,13 @@ const cors = require("cors");
 const morgan = require("morgan");
 const connectDB = require("./config/db");
 const authRoutes = require("./routes/authRoutes");
+const announcementRoutes = require("./routes/announcementRoutes");
+const paymentRoutes = require("./routes/paymentRoutes");
+const classScheduleRoutes = require("./routes/classScheduleRoutes");
+const studentListRoutes = require("./routes/studentListRoutes");
+
+
+
 
 dotenv.config();
 
@@ -12,7 +19,6 @@ app.use(express.json());
 app.use(cors());
 app.use(morgan("dev"));
 
-app.use("/api/auth", authRoutes);
 
 const PORT = process.env.PORT || 5000;
 
@@ -25,4 +31,13 @@ const startServer = async () => {
   }
 };
 
+app.use("/api/auth", authRoutes);
+app.use("/api/announcements", announcementRoutes);
+app.use("/api/payments", paymentRoutes);
+app.use("/api/class-schedules", classScheduleRoutes);
+app.use("/api/student-lists", studentListRoutes);
+
 startServer();
+
+
+module.exports = app
