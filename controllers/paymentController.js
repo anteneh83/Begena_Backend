@@ -2,26 +2,27 @@ const Payment = require("../models/Payment");
 
 // User creates a payment
 exports.createPayment = async (req, res) => {
-    try {
-        const { fullName, section, screenshot, month } = req.body;
-        const payment = new Payment({
-            fullName,
-            section,
-            screenshot,
-            month,
-            createdBy: req.user.id
-        });
-        await payment.save();
-        res.status(201).json({ success: true, payment });
-    } catch (error) {
-        res.status(500).json({ success: false, message: error.message });
-    }
+  try {
+    const { fullName, section, screenshot, month } = req.body;
+
+    const payment = new Payment({
+      fullName,
+      section,
+      screenshot,
+      month
+    });
+
+    await payment.save();
+    res.status(201).json({ success: true, payment });
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
 };
 
 // Admin: Get all payments
 exports.getAllPayments = async (req, res) => {
     try {
-        const payments = await Payment.find().populate("createdBy", "fullName email").sort({ createdAt: -1 });
+        const payments = await Payment.find().populate("fullName").sort({ createdAt: -1 });
         res.status(200).json({ success: true, payments });
     } catch (error) {
         res.status(500).json({ success: false, message: error.message });
@@ -31,7 +32,7 @@ exports.getAllPayments = async (req, res) => {
 // Admin: Get a payment by ID
 exports.getPaymentById = async (req, res) => {
     try {
-        const payment = await Payment.findById(req.params.id).populate("createdBy", "fullName email");
+        const payment = await Payment.findById(req.params.id).populate("fullName");
         if (!payment) return res.status(404).json({ success: false, message: "Payment not found" });
         res.status(200).json({ success: true, payment });
     } catch (error) {

@@ -9,9 +9,6 @@ const paymentRoutes = require("./routes/paymentRoutes");
 const classScheduleRoutes = require("./routes/classScheduleRoutes");
 const studentListRoutes = require("./routes/studentListRoutes");
 
-
-
-
 dotenv.config();
 
 const app = express();
