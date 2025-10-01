@@ -12,13 +12,24 @@ const paymentSchema = new mongoose.Schema({
         trim: true
     },
     screenshot: {
-        type: String, // URL string
+        type: String, 
         required: true
     },
     month: {
         type: String,
         required: true
     },
+    begenaId: {
+        type: String,
+        required: true,
+        unique: true,   
+        trim: true
+    },
+    batch: {
+        type: String,
+        required: true,
+        trim: true
+    }
 }, {
     timestamps: true
 });
