@@ -22,7 +22,6 @@ const paymentSchema = new mongoose.Schema({
     begenaId: {
         type: String,
         required: true,
-        unique: true,   
         trim: true
     },
     batch: {

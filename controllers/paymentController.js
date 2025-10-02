@@ -17,12 +17,7 @@ exports.createPayment = async (req, res) => {
     await payment.save();
     res.status(201).json({ success: true, payment });
   } catch (error) {
-    if (error.code === 11000 && error.keyValue?.begenaId) {
-      return res.status(400).json({ 
-        success: false, 
-        message: `Payment with begenaId ${error.keyValue.begenaId} already exists` 
-      });
-    }
+    console.error(error);
     res.status(500).json({ success: false, message: error.message });
   }
 };
