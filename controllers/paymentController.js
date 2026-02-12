@@ -15,10 +15,28 @@ exports.createPayment = async (req, res) => {
     });
 
     await payment.save();
-    res.status(201).json({ success: true, payment });
+
+    res.status(201).json({
+      success: true,
+      message: "Payment submitted successfully",
+      payment
+    });
+
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ success: false, message: error.message });
+    console.error("Create Payment Error:", error);
+
+    // 🔥 Handle duplicate month payment
+    if (error.code === 11000) {
+      return res.status(400).json({
+        success: false,
+        message: "Payment for this month has already been submitted."
+      });
+    }
+
+    res.status(500).json({
+      success: false,
+      message: "Something went wrong. Please try again."
+    });
   }
 };
 
