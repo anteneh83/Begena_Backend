@@ -12,7 +12,7 @@ const paymentSchema = new mongoose.Schema({
         trim: true
     },
     screenshot: {
-        type: String, 
+        type: String,
         required: true
     },
     month: {
@@ -32,5 +32,7 @@ const paymentSchema = new mongoose.Schema({
 }, {
     timestamps: true
 });
+
+paymentSchema.index({ begenaId: 1, month: 1 }, { unique: true });
 
 module.exports = mongoose.model("Payment", paymentSchema);
